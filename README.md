@@ -26,6 +26,7 @@ Abraham, A., Pedregosa, F., Eickenberg, M., Gervais, P., Mueller, A., Kossaifi, 
 - nibabel
 - natsort
 - jinja2
+- load_confounds
 
 First, download this repository to a directory. Then, navigate to the directory, `nixtract/`, and run `pip install .` to install `nixtract`. To check your installation, run `nixtract -h` and you should see the help information.
 
