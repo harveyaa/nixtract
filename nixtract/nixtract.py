@@ -77,7 +77,7 @@ class FunctionalImage(object):
             self.regressor_file = regressor_fname
             self.regressors = regressors
             
-        elif (regressor_file is None) and regressor_input:
+        elif (self.regressor_file is None) and regressor_input:
             warnings.warn('Regressors are provided without regressor_file. No '
                       'confound regression can be done')
 
