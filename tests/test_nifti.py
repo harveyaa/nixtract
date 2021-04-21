@@ -40,7 +40,7 @@ import pandas as pd
 
 from nixtract.extractors.nifti_extractor import _set_volume_masker
 from nilearn.input_data import (NiftiLabelsMasker, NiftiMasker, 
-                                NiftiSpheresMasker)
+                                NiftiSpheresMasker,NiftiMapsMasker)
 
 
 def test_set_volume_masker(data_dir, mock_data):
@@ -131,6 +131,19 @@ def test_coord_atlas(data_dir, mock_data, tmpdir):
 
     expected = np.tile(np.arange(1, 101), (10, 1))
     assert np.array_equal(actual.values, expected)
+
+def test_prob_atlas(data_dir, mock_data, tmpdir):
+    # Just test that extraction runs for now
+    difumo = 'difumo64.nii.gz'
+    roi_file = os.path.join(data_dir, difumo)
+    func = os.path.join(mock_data, 'schaefer_func.nii.gz')
+
+    cmd = (f"nixtract-nifti {tmpdir} --input_files {func} "
+           f"--roi_file {roi_file}")
+    subprocess.run(cmd.split())
+    actual = pd.read_table(os.path.join(tmpdir, 'schaefer_func_timeseries.tsv'))
+
+    assert actual.shape[1] == 64
 
 
 def test_labels(data_dir, mock_data, tmpdir, nifti_label_config):
